@@ -9,12 +9,33 @@
   <body>
     <div id="app">
       <h1>Smiling Friends Characters</h1>
-      <ul v-if="characters.length">
-        <li v-for="(char, i, arr) in characters">
+      <p v-if="!characters.length">No Characters Exist 😔</p>
+      <ul v-else>
+        <li v-for="char in characters">
+          <button @click="addFav(char)">⭐️ Favorite</button>
           Name: {{char.name}}, Age: {{char.age}}
         </li>
       </ul>
-      <p v-else v-show="ok">No Characters Exist 😔</p>
+      <h2>Favorite Characters</h2>
+      <p v-if="!favCharacters.length">No favorite characters 😔</p>
+      <ul v-else>
+        <li v-for="fav in favCharacters">{{fav.name}}</li>
+      </ul>
+      <form @submit.prevent>
+        <h2>Enter a Character</h2>
+        <div>
+          <p>Name</p>
+          <label for="character"></label>
+          <input type="text" id="character" v-model="newChar" />
+        </div>
+        <div>
+          <p>Age</p>
+          <label for="age"></label>
+          <input type="number" id="age" v-model="newAge" />
+        </div>
+        <br />
+        <button @click="addChar">Add Character</button>
+      </form>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -23,13 +44,24 @@
         data() {
           return {
             msg: "Howdy!",
+            favCharacters: [],
             characters: [
               { name: "Geralt", age: 23 },
               { name: "Sam", age: 43 },
               { name: "Derk", age: 87 },
               { name: "Werl", age: 28 },
             ],
+            newChar: "",
+            newAge: 0,
           };
+        },
+        methods: {
+          addFav(fav) {
+            this.favCharacters.push(fav);
+          },
+          addChar() {
+            this.characters.push({ name: this.newChar, age: this.newAge });
+          },
         },
       });
       app.mount("#app");
