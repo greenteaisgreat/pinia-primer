@@ -4,7 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Playground — Complete Intro to Vue 3</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <h1>Smiling Friends Characters</h1>
+      <ul v-if="characters.length">
+        <li v-for="(char, i, arr) in characters">
+          Name: {{char.name}}, Age: {{char.age}}
+        </li>
+      </ul>
+      <p v-else v-show="ok">No Characters Exist 😔</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            msg: "Howdy!",
+            characters: [
+              { name: "Geralt", age: 23 },
+              { name: "Sam", age: 43 },
+              { name: "Derk", age: 87 },
+              { name: "Werl", age: 28 },
+            ],
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
 </html>
