@@ -8,7 +8,8 @@
   </head>
   <body>
     <div id="app">
-      <h2>{{counterTitle}}</h2>
+      <h2>{{displayTitle}}</h2>
+      <h3>Optimized Increment: {{optimizedIncrementAmount}}</h3>
       <button @click="increment">Click Me!</button> <br />
       <span>
         <label for="countAmount">Increment By: </label>
@@ -30,26 +31,44 @@
           return {
             msg: "Howdy!",
             characters: ["Sam", "Andy", "Tim", "Nate"],
-            count: 0,
-            countAmount: 5,
+            count: 1,
+            countAmount: 1,
             counterTitle: "Counter Standard",
           };
         },
+        computed: {
+          //computed is similar to watch, except it's more performant
+          //for larger data sets; computed tracks when its dependencies
+          //have changed. you're also able to chain dependencies in with
+          //any methods defined within computed so that multiple values
+          //can be connected together
+          displayTitle() {
+            if (this.count > 20) {
+              return "Counter Extended";
+            } else {
+              return "Counter Standard";
+            }
+          },
+          optimizedIncrementAmount() {
+            return this.displayTitle.length * this.countAmount;
+          },
+        },
         methods: {
           increment() {
-            this.count += this.countAmount;
+            this.count += this.optimizedIncrementAmount;
           },
         },
         watch: {
-          //watch observes data state; name a method for whatever piece
-          //of data you want to track. it's not the best for large data
-          //sets however; computed properties are the better alternative
+          //watch observes data state; name a method as the same label for
+          //whatever piece of data you want to track. it's not the best for
+          //large data sets however; computed properties are the better alternative
           countAmount(newValue) {
             console.log(newValue);
           },
           count(newValue) {
             console.log(newValue);
             if (this.count > 20) {
+              //the <h2> was previously {{counterTitle}}
               this.counterTitle = "Counter Extended";
             }
           },
