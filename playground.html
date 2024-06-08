@@ -12,7 +12,7 @@
       <button @click="increment">Click Me!</button> <br />
       <span>
         <label for="countAmount">Increment By: </label>
-        <input id="countAmount" v-model="countAmount" />
+        <input type="number" id="countAmount" v-model="countAmount" />
       </span>
       <p>{{count}}</p>
       <hr />
@@ -35,7 +35,9 @@
           };
         },
         methods: {
-          increment() {
+          increment(newAmount, event) {
+            console.log(newAmount);
+            console.log(event);
             this.count += this.countAmount;
           },
         },
