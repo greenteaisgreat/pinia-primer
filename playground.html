@@ -8,13 +8,19 @@
   </head>
   <body>
     <div id="app">
-      <h1>Smiling Friends Characters</h1>
+      <h2>Counter</h2>
+      <button @click="increment">Click Me!</button> <br />
+      <span>
+        <label for="countAmount">Increment By: </label>
+        <input type="number" id="countAmount" v-model="countAmount" />
+      </span>
+      <p>{{count}}</p>
+      <hr />
+      <h1>Howdy World!</h1>
       <ul v-if="characters.length">
-        <li v-for="char in characters">
-          Name: {{char.name}} Age: {{char.age}}
-        </li>
+        <li v-for="char in characters">{{char}}</li>
       </ul>
-      <p v-else v-show="ok">No Characters Exist 😔</p>
+      <p v-else>No Characters 😔</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -23,13 +29,15 @@
         data() {
           return {
             msg: "Howdy!",
-            characters: [
-              { name: "Geralt", age: 23 },
-              { name: "Sam", age: 43 },
-              { name: "Derk", age: 87 },
-              { name: "Werl", age: 28 },
-            ],
+            characters: ["Sam", "Andy", "Tim"],
+            count: 0,
+            countAmount: 0,
           };
+        },
+        methods: {
+          increment() {
+            this.count += this.countAmount;
+          },
         },
       });
       app.mount("#app");
