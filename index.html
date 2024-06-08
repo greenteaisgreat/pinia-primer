@@ -26,12 +26,12 @@
         <div>
           <p>Name</p>
           <label for="character"></label>
-          <input type="text" id="character" v-model="newChar" />
+          <input type="text" id="character" v-model="newChar.name" />
         </div>
         <div>
           <p>Age</p>
           <label for="age"></label>
-          <input type="number" id="age" v-model="newAge" />
+          <input type="number" id="age" v-model="newChar.age" />
         </div>
         <br />
         <button @click="addChar">Add Character</button>
@@ -51,8 +51,7 @@
               { name: "Derk", age: 87 },
               { name: "Werl", age: 28 },
             ],
-            newChar: "",
-            newAge: 0,
+            newChar: { name: "", age: null },
           };
         },
         methods: {
@@ -60,7 +59,11 @@
             this.favCharacters.push(fav);
           },
           addChar() {
-            this.characters.push({ name: this.newChar, age: this.newAge });
+            this.characters.push({
+              name: this.newChar.name,
+              age: this.newChar.age,
+            });
+            this.newChar = { name: "", age: null };
           },
         },
       });

@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="app">
-      <h2>Counter</h2>
+      <h2>{{counterTitle}}</h2>
       <button @click="increment">Click Me!</button> <br />
       <span>
         <label for="countAmount">Increment By: </label>
@@ -32,13 +32,26 @@
             characters: ["Sam", "Andy", "Tim", "Nate"],
             count: 0,
             countAmount: 5,
+            counterTitle: "Counter Standard",
           };
         },
         methods: {
-          increment(newAmount, event) {
-            console.log(newAmount);
-            console.log(event);
+          increment() {
             this.count += this.countAmount;
+          },
+        },
+        watch: {
+          //watch observes data state; name a method for whatever piece
+          //of data you want to track. it's not the best for large data
+          //sets however; computed properties are the better alternative
+          countAmount(newValue) {
+            console.log(newValue);
+          },
+          count(newValue) {
+            console.log(newValue);
+            if (this.count > 20) {
+              this.counterTitle = "Counter Extended";
+            }
           },
         },
       });
