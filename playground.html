@@ -7,25 +7,28 @@
     <title>Playground — Complete Intro to Vue 3</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
     <div id="app">
-      <p v-if="message.length % 2 === 0">{{message.toUpperCase()}}</p>
-      <p v-else>{{oddMessage}}</p>
-      <ul>
-        <li v-for="item in list">{{item * Math.PI}}</li>
+      <h1>Smiling Friends Characters</h1>
+      <ul v-if="characters.length">
+        <li v-for="char in characters">
+          Name: {{char.name}} Age: {{char.age}}
+        </li>
       </ul>
+      <p v-else v-show="ok">No Characters Exist 😔</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script setup>
-      //similar to Vue.createApp
+    <script>
       const { createApp } = Vue;
       const app = createApp({
-        //best practice to have data be a function to avoid stale values
         data() {
           return {
-            message: "Howdy!",
-            oddMessage: "Boooo!",
-            list: [1, 2, 3, 4, 5],
+            msg: "Howdy!",
+            characters: [
+              { name: "Geralt", age: 23 },
+              { name: "Sam", age: 43 },
+              { name: "Derk", age: 87 },
+              { name: "Werl", age: 28 },
+            ],
           };
         },
       });
