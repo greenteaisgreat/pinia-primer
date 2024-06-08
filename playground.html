@@ -61,7 +61,9 @@
         watch: {
           //watch is best used for when you need to take advantage of side-effects,
           //such as in an API call or adjusting the speed on a video player. it's not
-          //suited for tracking your actual data in your application; computed is for that
+          //suited for tracking your actual data in your application; computed is better
+          //suited for that. !! ——> also, you need to name all methods in watch the
+          //same as the label for the data that you're tracking
           countAmount(newValue) {
             console.log(newValue);
           },
