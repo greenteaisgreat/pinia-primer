@@ -38,7 +38,7 @@
         },
         computed: {
           //computed is similar to watch, except it's more performant
-          //for larger data sets; computed tracks when its dependencies
+          //for local data; computed tracks when its dependencies
           //have changed. you're also able to chain dependencies in with
           //any methods defined within computed so that multiple values
           //can be connected together
@@ -59,9 +59,9 @@
           },
         },
         watch: {
-          //watch observes data state; name a method as the same label for
-          //whatever piece of data you want to track. it's not the best for
-          //large data sets however; computed properties are the better alternative
+          //watch is best used for when you need to take advantage of side-effects,
+          //such as in an API call or adjusting the speed on a video player. it's not
+          //suited for tracking your actual data in your application; computed is for that
           countAmount(newValue) {
             console.log(newValue);
           },

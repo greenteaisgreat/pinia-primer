@@ -41,7 +41,7 @@
         <br />
         <button @click="addChar">Add Character</button>
       </form>
-      <h2>Character Attributes</h2>
+      <h2>Total Character Attribute Percentages</h2>
       <div>
         <pre v-if="characters.length">{{charAttributes}}</pre>
         <p v-else>No Character Attributes 😔</p>
@@ -87,7 +87,8 @@
             });
             const totals = Object.values(attributes).reduce((a, b) => a + b);
             for (const key in attributes) {
-              attributes[key] = (attributes[key] / totals) * 100 + "%";
+              attributes[key] =
+                ((attributes[key] / totals) * 100).toFixed(0) + "%";
             }
             return attributes;
           },
