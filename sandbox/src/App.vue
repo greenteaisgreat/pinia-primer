@@ -3,96 +3,84 @@
     data() {
       return {
         msg: 'Howdy!',
-        characters: ['Sam', 'Andy', 'Tim', 'Nate'],
-        count: 1,
-        countAmount: 1,
-        counterTitle: 'Counter Standard',
+        favCharacters: [],
+        characters: [
+          { name: 'Geralt', age: 23, special: 'Fire' },
+          { name: 'Sam', age: 43, special: 'Water' },
+          { name: 'Derk', age: 87, special: 'Air' },
+          { name: 'Werl', age: 28, special: 'Fire' },
+        ],
+        newChar: { name: '', age: null, special: '' },
       };
     },
-    computed: {
-      //computed is similar to watch, except it's more performant
-      //for local data; computed tracks when its dependencies
-      //have changed. you're also able to chain dependencies in with
-      //any methods defined within computed so that multiple values
-      //can be connected together
-      displayTitle() {
-        if (this.count > 20) {
-          return 'Counter Extended';
-        } else {
-          return 'Counter Standard';
-        }
-      },
-      optimizedIncrementAmount() {
-        return this.displayTitle.length * this.countAmount;
-      },
-    },
     methods: {
-      increment() {
-        this.count += this.optimizedIncrementAmount;
+      addFav(fav) {
+        this.favCharacters.push(fav);
+      },
+      addChar() {
+        this.characters.push({
+          name: this.newChar.name,
+          age: this.newChar.age,
+          special: this.newChar.special,
+        });
+        this.newChar = { name: '', age: null, special: '' };
       },
     },
-    watch: {
-      //watch is best used for when you need to take advantage of side-effects,
-      //such as in an API call or adjusting the speed on a video player. it's not
-      //suited for tracking your actual data in your application; computed is better
-      //suited for that. !! ——> also, you need to name all methods in watch the
-      //same as the label for the data that you're tracking
-      countAmount(newValue) {
-        console.log(newValue);
-      },
-      count(newValue) {
-        console.log(newValue);
-        if (this.count > 20) {
-          //the <h2> was previously {{counterTitle}}
-          this.counterTitle = 'Counter Extended';
+    computed: {
+      charAttributes() {
+        const attributes = {};
+        this.characters.forEach((char) => {
+          attributes[char.special]
+            ? attributes[char.special]++
+            : (attributes[char.special] = 1);
+        });
+        const totals = Object.values(attributes).reduce((a, b) => a + b);
+        for (const key in attributes) {
+          attributes[key] = ((attributes[key] / totals) * 100).toFixed(0) + '%';
         }
+        return attributes;
       },
     },
   };
 </script>
 
 <template>
-  <h2>{{ displayTitle }}</h2>
-  <h3>Optimized Increment: {{ optimizedIncrementAmount }}</h3>
-  <button @click="increment">Click Me!</button> <br />
-  <span>
-    <label for="countAmount">Increment By: </label>
-    <input type="number" id="countAmount" v-model="countAmount" />
-  </span>
-  <p>{{ count }}</p>
-  <hr />
-  <h1>Howdy World!</h1>
-  <ul v-if="characters.length">
-    <li v-for="char in characters">{{ char }}</li>
+  <h1>Smiling Friends Characters</h1>
+  <p v-if="!characters.length">No Characters Exist 😔</p>
+  <ul v-else>
+    <li v-for="(char, i) in characters" :key="`char-${i}`">
+      <button @click="addFav(char)">⭐️ Favorite</button>
+      Name: {{ char.name }}, Age: {{ char.age }}, Special: {{ char.special }}
+    </li>
   </ul>
-  <p v-else>No Characters 😔</p>
+  <h2>Favorite Characters</h2>
+  <p v-if="!favCharacters.length">No favorite characters 😔</p>
+  <ul v-else>
+    <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">{{ fav.name }}</li>
+  </ul>
+  <form @submit.prevent>
+    <h2>Enter a Character</h2>
+    <div>
+      <p>Name</p>
+      <label for="character"></label>
+      <input type="text" id="character" v-model="newChar.name" />
+    </div>
+    <div>
+      <p>Age</p>
+      <label for="age"></label>
+      <input type="number" id="age" v-model="newChar.age" />
+    </div>
+    <div>
+      <p>Special</p>
+      <label for="special"></label>
+      <input type="text" id="special" v-model="newChar.special" />
+    </div>
+    <br />
+    <button @click="addChar">Add Character</button>
+  </form>
+  <h2>Total Character Attribute Percentages</h2>
+  <div>
+    <pre v-if="characters.length">{{ charAttributes }}</pre>
+    <p v-else>No Character Attributes 😔</p>
+  </div>
 </template>
-
-<style scoped>
-  header {
-    line-height: 1.5;
-  }
-
-  .logo {
-    display: block;
-    margin: 0 auto 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    header {
-      display: flex;
-      place-items: center;
-      padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-      margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-      display: flex;
-      place-items: flex-start;
-      flex-wrap: wrap;
-    }
-  }
-</style>
