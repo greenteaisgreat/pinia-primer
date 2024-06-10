@@ -2,7 +2,7 @@
   export default {
     //can also be used like this, below, but unable to define
     //any types or if it's required and many other properties
-    // props: ['actors'],
+    //props: ['actors'],
     props: {
       actors: {
         type: Array,
