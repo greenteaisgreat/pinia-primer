@@ -2,6 +2,7 @@
 export default {
   data: () => ({
     users: [],
+    uuid: crypto.randomUUID(),
   }),
   methods: {
     async fetchUsers() {
@@ -22,7 +23,7 @@ export default {
 
 <template>
   <ul>
-    <li v-for="person in users">
+    <li v-for="person in users" :key="uuid">
       <p>Name: {{ person.name }}</p>
       <p>Email: {{ person.email }}</p>
     </li>
