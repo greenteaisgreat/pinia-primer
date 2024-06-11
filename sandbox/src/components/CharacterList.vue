@@ -1,11 +1,13 @@
 <script>
   import AddCharacter from './AddCharacter.vue';
   import CharacterAttributes from './CharacterAttributes.vue';
+  import CharacterCard from './CharacterCard.vue';
 
   export default {
     components: {
       AddCharacter,
       CharacterAttributes,
+      CharacterCard,
     },
     data() {
       return {
@@ -19,8 +21,8 @@
       };
     },
     methods: {
-      addFav(fav) {
-        this.favCharacters.push(fav);
+      addFavorite(payload) {
+        this.favCharacters.push(payload);
       },
     },
   };
@@ -31,14 +33,15 @@
   <p v-if="!characters.length">No Characters Exist 😔</p>
   <ul v-else>
     <li v-for="(char, i) in characters" :key="`char-${i}`">
-      <button @click="addFav(char)">⭐️ Favorite</button>
-      Name: {{ char.name }}, Age: {{ char.age }}, Special: {{ char.special }}
+      <CharacterCard :char="char" @fav-chars="addFavorite" />
     </li>
   </ul>
   <h2>Favorite Characters</h2>
   <p v-if="!favCharacters.length">No favorite characters 😔</p>
   <ul v-else>
-    <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">{{ fav.name }}</li>
+    <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">
+      Name: {{ fav.name.name }}
+    </li>
   </ul>
   <AddCharacter :actors="characters" />
   <CharacterAttributes :actors="characters" />
