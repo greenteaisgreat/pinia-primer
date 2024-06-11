@@ -2,12 +2,14 @@
   import AddCharacter from './AddCharacter.vue';
   import CharacterAttributes from './CharacterAttributes.vue';
   import CharacterCard from './CharacterCard.vue';
+  import BaseLayout from './BaseLayout.vue';
 
   export default {
     components: {
       AddCharacter,
       CharacterAttributes,
       CharacterCard,
+      BaseLayout,
     },
     data() {
       return {
@@ -29,22 +31,32 @@
 </script>
 
 <template>
-  <h1>Smiling Friends Characters</h1>
-  <p v-if="!characters.length">No Characters Exist 😔</p>
-  <ul v-else>
-    <li v-for="(char, i) in characters" :key="`char-${i}`">
-      <CharacterCard :char="char" @fav-chars="addFavorite" />
-    </li>
-  </ul>
-  <h2>Favorite Characters</h2>
-  <p v-if="!favCharacters.length">No favorite characters 😔</p>
-  <ul v-else>
-    <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">
-      Name: {{ fav.name }}
-    </li>
-  </ul>
-  <AddCharacter :actors="characters" />
-  <CharacterAttributes :actors="characters" />
+  <BaseLayout>
+    <template v-slot:top-main>
+      <h1>Smiling Friends Characters</h1>
+      <p v-if="!characters.length">No Characters Exist 😔</p>
+      <ul v-else>
+        <li v-for="(char, i) in characters" :key="`char-${i}`">
+          <CharacterCard :char="char" @fav-chars="addFavorite" />
+        </li>
+      </ul>
+    </template>
+    <template v-slot:top-aside>
+      <h2>Favorite Characters</h2>
+      <p v-if="!favCharacters.length">No favorite characters 😔</p>
+      <ul v-else>
+        <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">
+          Name: {{ fav.name }}
+        </li>
+      </ul>
+    </template>
+    <template v-slot:bottom-main
+      ><AddCharacter :actors="characters"
+    /></template>
+    <template v-slot:bottom-aside
+      ><CharacterAttributes :actors="characters"
+    /></template>
+  </BaseLayout>
 </template>
 
 <style scoped></style>
