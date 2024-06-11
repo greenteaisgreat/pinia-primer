@@ -33,7 +33,6 @@ export default {
     <input type="number" id="countAmount" v-model="countAmount" />
   </span>
   <p>{{ count }}</p>
-  <hr />
 </template>
 
 <style></style>
