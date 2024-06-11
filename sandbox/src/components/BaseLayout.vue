@@ -49,5 +49,6 @@
     border-radius: 4px;
     background-color: aliceblue;
     max-width: 30rem;
+    align-content: center;
   }
 </style>
