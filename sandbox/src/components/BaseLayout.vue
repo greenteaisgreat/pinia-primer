@@ -38,6 +38,7 @@
     margin: 1rem 10px;
     padding: 1rem;
     border-radius: 4px;
+    background-color: aliceblue;
   }
   aside {
     border: 3px solid black;
@@ -45,5 +46,6 @@
     margin: 1rem 10px;
     padding: 1rem;
     border-radius: 4px;
+    background-color: aliceblue;
   }
 </style>
