@@ -39,6 +39,7 @@
     padding: 1rem;
     border-radius: 4px;
     background-color: aliceblue;
+    max-width: 30rem;
   }
   aside {
     border: 3px solid black;
@@ -47,5 +48,6 @@
     padding: 1rem;
     border-radius: 4px;
     background-color: aliceblue;
+    max-width: 30rem;
   }
 </style>
