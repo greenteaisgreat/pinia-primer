@@ -40,7 +40,7 @@
   <p v-if="!favCharacters.length">No favorite characters 😔</p>
   <ul v-else>
     <li v-for="(fav, i) in favCharacters" :key="`fav-${i}`">
-      Name: {{ fav.name.name }}
+      Name: {{ fav.name }}
     </li>
   </ul>
   <AddCharacter :actors="characters" />
