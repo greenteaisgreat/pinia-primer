@@ -1,12 +1,13 @@
 <script>
-import { render } from "vue";
 import HomePage from "./components/HomePage.vue";
 import LoginPage from "./components/LoginPage.vue";
+import UsersPage from "./components/UsersPage.vue";
 
 export default {
   components: {
     HomePage,
     LoginPage,
+    UsersPage,
   },
   data: () => ({
     currentPage: "Home",
@@ -17,6 +18,9 @@ export default {
     },
     showLoginPage() {
       this.currentPage = "Login";
+    },
+    showUsersPage() {
+      this.currentPage = "Users";
     },
   },
   // don't forget computed methods need a 'return' statement!!
@@ -38,6 +42,7 @@ export default {
     <nav class="nav">
       <a href="#" @click.prevent="showHomePage">Home</a>
       <a href="#" @click.prevent="showLoginPage">Login</a>
+      <a href="#" @click.prevent="showUsersPage">Users</a>
     </nav>
   </header>
   <!-- <component> is a Vue specific element and 'is' links to that component;
