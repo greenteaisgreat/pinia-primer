@@ -18,7 +18,7 @@
         //the second arg in $emit is the payload; it's best to group multiple
         //properties into a single object, rather than add more than 2 args
         this.$emit('fav-chars', {
-          name: this.char,
+          name: this.char.name,
           id: crypto.randomUUID(),
         });
       },
@@ -30,6 +30,7 @@
   <div>
     <button @click="addFav">⭐️ Favorite</button>
     <p>
+      <!-- 'char' is the label in the v-for area in CharacterList -->
       Name: {{ char.name }}, Age: {{ char.age }}, Special: {{ char.special }}
     </p>
   </div>
