@@ -32,7 +32,9 @@
 
 <template>
   <BaseLayout>
-    <template v-slot:top-main>
+    <!-- It's possible to swap v-slots to reorganize the sections
+    (i.e., swap bottom-main with top-main and vice-versa) -->
+    <template v-slot:bottom-main>
       <h1>Smiling Friends Characters</h1>
       <p v-if="!characters.length">No Characters Exist 😔</p>
       <ul v-else>
@@ -50,9 +52,7 @@
         </li>
       </ul>
     </template>
-    <template v-slot:bottom-main
-      ><AddCharacter :actors="characters"
-    /></template>
+    <template v-slot:top-main><AddCharacter :actors="characters" /></template>
     <template v-slot:bottom-aside
       ><CharacterAttributes :actors="characters"
     /></template>
