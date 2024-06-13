@@ -19,6 +19,7 @@
         });
         const totals = Object.values(attributes).reduce((a, b) => a + b);
         for (const key in attributes) {
+          // displays two-digit percentage next to attribute
           attributes[key] = ((attributes[key] / totals) * 100).toFixed(0) + '%';
         }
         return attributes;
