@@ -1,8 +1,19 @@
-<script></script>
+<script>
+export default {
+  inheritAttrs: false,
+  props: {
+    loginTitle: {
+      type: String,
+      required: true,
+      default: "Login",
+    },
+  },
+};
+</script>
 
 <template>
   <main>
-    <h1>Login</h1>
+    <h1>{{ loginTitle }}</h1>
     <label for="email">Email</label>
     <input type="email" />
     <button>Continue with email</button>
