@@ -1,20 +1,47 @@
 <script>
+import { ref } from "vue";
+
 export default {
-  data: () => ({
-    users: [],
-    uuid: crypto.randomUUID(),
-  }),
-  methods: {
-    async fetchUsers() {
-      try {
-        this.users = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        ).then((res) => res.json());
-      } catch (error) {
-        console.log("There was an error:", error);
-      }
-    },
+  // any time async is prepended on setup, you must use <Suspense>
+  // in the parent component for it to have a fallback value
+  async setup() {
+    const users = ref([]);
+
+    async function fetchUsers() {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      ).then((res) => res.json());
+
+      return response;
+    }
+    //we assign users to fetchUsers for more reusable code
+    users.value = await fetchUsers();
+    const uuid = ref(crypto.randomUUID());
+
+    return {
+      fetchUsers,
+      users,
+      uuid,
+    };
   },
+
+  // data: () => ({
+  //   users: [],
+  //   uuid: crypto.randomUUID(),
+  // }),
+
+  // methods: {
+  //   async fetchUsers() {
+  //     try {
+  //       this.users = await fetch(
+  //         "https://jsonplaceholder.typicode.com/users"
+  //       ).then((res) => res.json());
+  //     } catch (error) {
+  //       console.log("There was an error:", error);
+  //     }
+  //   },
+  // },
+
   created() {
     this.fetchUsers();
   },
