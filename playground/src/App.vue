@@ -59,7 +59,7 @@
   <!-- <Suspense> MUST be used on a parent component that's registering content
   from a child component! A warning will be issued to let you know if you do that -->
   <Suspense>
-    <Pokedex />
+    <Pokedex regionName="Peepee" />
     <template v-slot:fallback>
       <h3>Loading Pokedex data</h3>
     </template>
