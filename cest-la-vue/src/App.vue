@@ -2,12 +2,14 @@
 import HomePage from "./components/HomePage.vue";
 import LoginPage from "./components/LoginPage.vue";
 import UsersPage from "./components/UsersPage.vue";
+import TrackMouse from "./components/TrackMouse.vue";
 
 export default {
   components: {
     HomePage,
     LoginPage,
     UsersPage,
+    TrackMouse,
   },
   data: () => ({
     currentPage: "Home",
@@ -35,6 +37,7 @@ export default {
 </script>
 
 <template>
+  <TrackMouse />
   <header class="header">
     <span class="logo">
       <img src="@/assets/vue-heart.png" width="30" />C'est La Vue
@@ -54,7 +57,7 @@ export default {
   as we're doing here with a computed property; we're concatenating the result of
   currentPage @click with 'Page', delivering a primitive routing system -->
   <Suspense>
-    <component :is="renderPage" />
+    <component :is="renderPage" title="Poops" loginTitle="Login, Foo!" />
     <!-- fallback for suspense; in production apps, you'll want to have a 
     nicer loading page than simple text, such as this -->
     <template v-slot:fallback>Data is loading...</template>
