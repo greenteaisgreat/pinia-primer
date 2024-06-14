@@ -26,7 +26,7 @@ export default {
   // don't forget computed methods need a 'return' statement!!
   computed: {
     renderPage() {
-      // due to currenPage's properties aligning
+      // due to currentPage's properties aligning
       // with the respective component's name
       return this.currentPage + "Page";
     },
@@ -53,7 +53,12 @@ export default {
   <!-- the difference in using <component> is that it can be managed with pure JS
   as we're doing here with a computed property; we're concatenating the result of
   currentPage @click with 'Page', delivering a primitive routing system -->
-  <component :is="renderPage" />
+  <Suspense>
+    <component :is="renderPage" />
+    <!-- fallback for suspense; in production apps, you'll want to have a 
+    nicer loading page than simple text, such as this -->
+    <template v-slot:fallback>Data is loading...</template>
+  </Suspense>
 
   <!-- Acceptable for 1 to 3 pages, but as sites get larger, it can
   become unruly to use v-if, v-else-if chaining; routing is the ideal
