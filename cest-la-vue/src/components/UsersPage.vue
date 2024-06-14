@@ -42,9 +42,11 @@ export default {
   //   },
   // },
 
-  created() {
-    this.fetchUsers();
-  },
+  // removed when migrating options api to composition, as
+  // fetchUsers would be called twice
+  // created() {
+  //   this.fetchUsers();
+  // },
 };
 </script>
 
