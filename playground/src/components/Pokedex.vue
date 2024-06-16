@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, ref } from 'vue';
+  import { computed, ref, onMounted } from 'vue';
 
   // imported components in Composition don't need to be registered
   import BaseButton from './BaseButton.vue';
@@ -34,6 +34,10 @@
     region.value = region.value === 'Kanto' ? 'Hoen' : 'Kanto';
     emits('change-region');
   }
+
+  onMounted(() => {
+    console.log('Do this thing!');
+  });
 </script>
 
 <!-- Showing the combination Options/Composition setup -->
