@@ -1,11 +1,15 @@
 <script setup>
-  import { ref } from 'vue';
   import Counter from './components/Counter.vue';
   import UserCard from './components/UserCard.vue';
-  import Pokedex from './components/Pokedex.vue';
+  import Pokedex from './views/PokedexPage.vue';
 </script>
 
 <template>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/pokedex">Poke</RouterLink>
+  </nav>
+  <RouterView />
   <Counter />
   <UserCard :userData="{ name: 'Nate' }" />
   <br />

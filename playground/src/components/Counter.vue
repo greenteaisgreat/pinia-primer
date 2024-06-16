@@ -31,7 +31,7 @@
     methods: {
       increment() {
         this.count += this.countAmount;
-        this.useCount += this.countAmount;
+        this.countStore.localCount.value += this.countAmount;
       },
     },
   };
@@ -45,7 +45,7 @@
   <h4>Local Count: {{ countStore.localCount }}</h4>
   <button @click="countStore.incrementLocalCount">Increment Local</button>
   <hr />
-  <h2>Newish Count: {{ useCount }}</h2>
+  <h2>Newish Count: {{ countStore.localCount.value }}</h2>
   <!-- <h3>Optimized Increment: {{ optimizedIncrementAmount }}</h3> -->
   <button @click="increment">Click Me!</button> <br />
   <span>

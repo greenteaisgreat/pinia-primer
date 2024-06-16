@@ -2,7 +2,7 @@
   import { computed, ref, onMounted } from 'vue';
 
   // imported components in Composition don't need to be registered
-  import BaseButton from './BaseButton.vue';
+  import BaseButton from '../components/BaseButton.vue';
 
   //prop is being defined in App.vue as an attribute
   const props = defineProps({
