@@ -1,4 +1,26 @@
-<script>
+<script setup>
+  import { ref } from 'vue';
+  import Counter from './components/Counter.vue';
+  import UserCard from './components/UserCard.vue';
+  import Pokedex from './components/Pokedex.vue';
+</script>
+
+<template>
+  <Counter />
+  <UserCard :userData="{ name: 'Nate' }" />
+  <br />
+  <br />
+  <br />
+  <Suspense>
+    <Pokedex />
+    <template v-slot:fallback>Pokedex Loading...</template>
+  </Suspense>
+</template>
+
+<style scoped></style>
+
+<!-- Old Comp/Options Code -->
+<!-- <script>
   import Pokedex from './components/Pokedex.vue';
   // https://pokeapi.co/api/v2/pokemon?limit=151
   export default {
@@ -52,20 +74,20 @@
     //   console.log('Unmounted');
     // },
   };
-</script>
+</script> -->
 
+<!-- 
 <template>
   <h1>New App</h1>
-  <!-- <Suspense> MUST be used on a parent component that's registering content
-  from a child component! A warning will be issued to let you know if you do that -->
+  <Suspense> MUST be used on a parent component that's registering content
+  from a child component! A warning will be issued to let you know if you do that
   <Suspense>
     <Pokedex regionName="Peepee" />
     <template v-slot:fallback>
       <h3>Loading Pokedex data</h3>
     </template>
   </Suspense>
-  <!-- <button @click="fetchPokemon">Get Pokemon!</button> -->
+  <button @click="fetchPokemon">Get Pokemon!</button>
   <img id="ditto" />
-</template>
-
-<style scoped></style>
+</template> 
+-->
