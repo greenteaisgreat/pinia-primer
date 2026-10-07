@@ -1,29 +1,20 @@
 <script setup>
 import { computed, ref } from 'vue'
-const count = ref(0)
+import { useCounterStore } from '@/stores/counter'
 
-function increment() {
-  count.value++
-}
-function decrement() {
-  count.value--
-}
-const determineParity = computed(() => {
-  if (count.value % 2 === 0) return 'even'
-  else return 'odd'
-})
+const storeCounter = useCounterStore()
 </script>
 
 <template>
   <div class="count">
-    {{ count }}
+    {{ storeCounter.count }}
   </div>
   <div class="buttons">
-    <button @click="decrement">-</button>
-    <button @click="increment">+</button>
+    <button @click="storeCounter.decrement">-</button>
+    <button @click="storeCounter.increment">+</button>
   </div>
   <hr />
-  <div class="even-or-odd">This number is currently {{ determineParity }}</div>
+  <div class="even-or-odd">This number is currently {{ storeCounter.determineParity }}</div>
 </template>
 
 <style>
