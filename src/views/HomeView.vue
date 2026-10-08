@@ -1,5 +1,4 @@
 <script setup>
-import { computed, ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 
 const storeCounter = useCounterStore()
@@ -15,6 +14,11 @@ const storeCounter = useCounterStore()
   </div>
   <hr />
   <div class="even-or-odd">This number is currently {{ storeCounter.determineParity }}</div>
+  <hr />
+  <div class="edit-counter">
+    <h3>Edit Counter:</h3>
+    <input type="number" v-model="storeCounter.count" />
+  </div>
 </template>
 
 <style>
