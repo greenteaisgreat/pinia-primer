@@ -7,7 +7,7 @@ export const useCounterStore = defineStore('counter', () => {
     if (count.value % 2 === 0) return 'even'
     else return 'odd'
   })
-  // test
+
   function increment() {
     count.value++
   }
