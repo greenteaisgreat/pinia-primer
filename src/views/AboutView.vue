@@ -12,7 +12,7 @@ const storeCounter = useCounterStore()
 
 <style>
 .counter-button {
-  padding: 1rem;
+  padding: 1rem 2rem;
   border-radius: 20px;
   font-size: 3rem;
   margin: 2rem;
